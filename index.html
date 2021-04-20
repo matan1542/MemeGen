@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeGen</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+
+<body onload="onInit()">
+    <header>
+        <section class="header-container">
+            <div class="logo">
+                MemeGen
+            </div>
+            <nav id="mainMenu" class="main-menu-wrapper">
+                <ul class="main-menu clean-list flex align-center">
+                    <li>
+                        <a href="index.html">Gallery</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="onOpenGalleryMemes()">Memes</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+    </header>
+    <main>
+        <section class="container main-wrapper flex">
+            <div class="images-wrapper">
+            </div>
+        </section>
+  
+    <div hidden class="editor-container">
+        <section class="container main-wrapper flex space-between">
+            <div class="first-panel">
+                <div class="image-canvas-wrapper">
+                    <div class="canvas-container">
+                        <!-- <canvas id="my-canvas" width="500" height="500" >
+                            Update your browser to enjoy canvas!
+                        </canvas> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="first-panel controller-section">
+                <form onsubmit="onSaveMeme(event)" class="form-container">
+                    <input class="input-text" oninput="onUpdateTxtLine(value)" type="text" value="Inever eat Falafel">
+
+                    <div class="control-lines">
+                        <div class="control-first-row">
+                            <button class="btn btn-next-line" onclick="onPrevLine()"><i
+                                    class="fas fa-long-arrow-alt-up"></i></button>
+                            <button class="btn btn-previous-line" onclick="onMoveNextLine() "><i
+                                    class="fas fa-long-arrow-alt-down"></i></button>
+                            <button class="btn btn-increase-font" onclick="onIncreaseFont() ">A+</button>
+                            <button class="btn btn-decrease-font" onclick="onDecreaseFont() ">A-</button>
+                            <button onclick="onAddLine()" class="btn btn-add-line">+</button>
+                            <button  class="btn btn-remove-line" onclick="onRemoveLine()"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                        <div class="control-second-row">
+                            <button class="btn btn-align-text" onclick="onAlignText('right')"><i
+                                    class="fas fa-align-left"></i></button>
+                            <button class="btn btn-align-text" onclick="onAlignText('center')"><i
+                                    class="fas fa-align-center"></i></button>
+                            <button class="btn btn-align-text" onclick="onAlignText('left')"><i
+                                    class="fas fa-align-right"></i></button>
+                            <label for="color-text"><i class="fas fa-palette"></i></label>
+                            <input hidden type="color" id="color-text" onchange="onChangeColor(value)">
+                        </div>
+                    </div>
+                    <button  class="btn btn-submit">shere</button>
+                </form>
+
+            </div>
+
+        </section>
+    </div>
+  
+</main>
+
+<div hidden class="memes-container">
+     
+</div>
+
+<footer>
+    <div class="content-container">
+        <h3>memegen</h3>
+        <h2>all rights reserved 2021</h2>
+    </div>  
+  </footer>
+
+
+    <script src="js/util/util-service.js"></script>
+    <script src="js/storage-service/storage-service.js"></script>
+    <script src="js/meme-service/meme-service.js"></script>
+    <script src="js/meme-service/canvas-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
+
+</html>
