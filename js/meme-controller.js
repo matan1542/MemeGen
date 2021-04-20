@@ -65,15 +65,17 @@ function onRemoveLine() {
     removeLine();
 }
 function onOpenGalleryMemes() {
+    renderImgMemes();
     const elMemesContainer = document.querySelector('.memes-container');
     elMemesContainer.hidden = false;
+
 }
 
 function openMemeEditor(elImg) {
     let elCanvasContainer = document.querySelector('.editor-container');
+    elCanvasContainer.hidden = false;
     setNewImg(elImg.dataset.id)
     renderCanvas(elImg.dataset.id);
-    elCanvasContainer.hidden = false;
 }
 
 
@@ -82,15 +84,14 @@ function onOpenMemeEditor(elImg) {
 }
 
 
-// function onSaveMeme(ev) {
-//     ev.preventDefault();
-//     var canvas = document.getElementById("mycanvas");
-//     var img = canvas.toDataURL("image/png");
-//     saveMeme();
-//     console.log('submittttt')
-
-// }
-
+function onFormMeme(ev) {
+    ev.preventDefault();
+}
+function onSaveMeme() {
+    drawImg();
+    saveMeme();
+    console.log('submittttt')
+}
 function onUpdateTxtLine(val) {
     updateTxtLine(val);
 }
@@ -128,16 +129,33 @@ function onChangeColor(val) {
 
 
 function renderCanvas(id = 'my-canvas', containerClass = 'canvas-container') {
+    const elImageContainerWidth = document.querySelector('.canvas-container').clientWidth;
+    const elImageContainerHeight = document.querySelector('.canvas-container').clientHeight;
+
     console.log('canvas rendered')
     var strHtml = `<canvas id="${id}">
     </canvas>`;
     document.querySelector(`.${containerClass}`).innerHTML = strHtml;
     gCanvas = document.getElementById(`${id}`);
     gCtx = gCanvas.getContext('2d');
-    gCanvas.width = 500;
-    gCanvas.height = 500;
+    // Can't make the width of the canvas match to his container for now
+    resizeCanvas();
+    // drawImg();
     setImgCanvBgImg();
     drawDetails();
     addListeners();
+    console.log(elImageContainerWidth);
 
+
+}
+
+
+function resizeCanvas() {
+    var elContainer = document.querySelector('.canvas-container');
+    // Note: changing the canvas dimension this way clears the canvas
+    gCanvas.width = elContainer.offsetWidth
+    console.log( elContainer.offsetWidth)
+    gCanvas.height = elContainer.offsetHeight
+    console.log('RESIZE');
+    // TODO: redraw..
 }

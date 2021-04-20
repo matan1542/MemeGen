@@ -20,6 +20,8 @@ function setNewImg(imgId) {
 }
 
 
+
+
 function _loadImgs() {
     let imgs = [];
     for (let i = 1; i <= 18; i++) {

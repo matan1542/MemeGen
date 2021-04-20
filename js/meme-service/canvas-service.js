@@ -2,6 +2,8 @@
 
 let gCountLines = 0;
 let gYPos = 50;
+let gImgMemes = [];
+let KEY = 'memes';
 let gMeme = {
     selectedImgId: makeId(),
     selectedLineIdx: 0,
@@ -90,10 +92,10 @@ function updateTxtLine(val) {
 }
 
 
-function removeLine(){
+function removeLine() {
     console.log('remove')
-    gMeme.lines.splice(gMeme.selectedLineIdx,1);
-    gMeme.selectedLineIdx --;
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+    gMeme.selectedLineIdx--;
     ifSelected()
     renderCanvas();
     console.dir(gMeme.lines)
@@ -112,14 +114,33 @@ function moveToNextLine() {
 }
 function drawText() {
     gMeme.lines.forEach(line => {
-            gCtx.fillStyle = (line.pickedColor) ? line.pickedColor : line.color;
+        gCtx.fillStyle = (line.pickedColor) ? line.pickedColor : line.color;
         gCtx.strokeStyle = 'black';
         gCtx.font = `${line.size}px ${line.family}`;
         gCtx.textAlign = line.align;
         gCtx.fillText(line.txt, line.x, line.y);
         gCtx.strokeText(line.txt, line.x, line.y);
+        drawImg()
+
     })
 }
+//function that will check if localStorage is empty or not and load the memes accordingly
+function loadMemesLocalStorage() {
+    if (!loadFromStorage(KEY)) {
+        gImgMemes = [];
+    }
+    else {
+        gImgMemes = loadFromStorage(KEY);
+    }
+}
+
+function saveMeme() {
+    loadMemesLocalStorage();
+    let img = gCanvas.toDataURL("image/png");
+    gImgMemes.push(img);
+    saveToStorage(KEY, gImgMemes);
+}
+
 // function drawRect(x, y, line) {
 //     gCtx.beginPath()
 //     gCtx.strokeStyle = 'black'
@@ -196,12 +217,16 @@ function createLine(x = 250, y) {
 
 
 function drawImg() {
+
     const elImg = new Image()
     elImg.src = `materials/img/${gMeme.selectedImgId}.jpg`;
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height);
-        drawDetails();
     }
+    elImg.style.zIndex = '-1';
+
+
+    return elImg;
 }
 
 function getImgs() {

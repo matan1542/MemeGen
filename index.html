@@ -33,8 +33,8 @@
         </section>
     </header>
     <main>
-        <section class="container main-wrapper flex">
-            <div class="images-wrapper">
+        <section class=" container main-wrapper flex">
+            <div class="images-wrapper ">
             </div>
         </section>
   
@@ -42,16 +42,14 @@
         <section class="container main-wrapper flex space-between">
             <div class="first-panel">
                 <div class="image-canvas-wrapper">
-                    <div class="canvas-container">
-                        <!-- <canvas id="my-canvas" width="500" height="500" >
-                            Update your browser to enjoy canvas!
-                        </canvas> -->
+                    <div class=" canvas-container">
+                        <!-- Canvas info-->
                     </div>
                 </div>
             </div>
 
             <div class="first-panel controller-section">
-                <form onsubmit="onSaveMeme(event)" class="form-container">
+                <form onsubmit="onFormMeme(event)" class="form-container">
                     <input class="input-text" oninput="onUpdateTxtLine(value)" type="text" value="Inever eat Falafel">
 
                     <div class="control-lines">
@@ -76,7 +74,7 @@
                             <input hidden type="color" id="color-text" onchange="onChangeColor(value)">
                         </div>
                     </div>
-                    <button  class="btn btn-submit">shere</button>
+                    <button onclick="onSaveMeme()"  class="btn btn-submit">shere</button>
                 </form>
 
             </div>
@@ -87,7 +85,9 @@
 </main>
 
 <div hidden class="memes-container">
-     
+    <div class="memes-wrapper container">
+        <img src="" alt="">
+    </div>
 </div>
 
 <footer>
@@ -102,6 +102,7 @@
     <script src="js/storage-service/storage-service.js"></script>
     <script src="js/meme-service/meme-service.js"></script>
     <script src="js/meme-service/canvas-service.js"></script>
+    <script src="js/meme-service/galleryMeme-service.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
 
