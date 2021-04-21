@@ -25,7 +25,6 @@ function onDown(ev) {
     const line = getCurrLine();
     const pos = getEvPos(ev)
     if (!isLineClicked(pos)) return
-    console.log('clicked')
     line.isDragging = true
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
@@ -42,7 +41,7 @@ function onMove(ev) {
         let distanceY = line.y + dy
         moveLine(distanceX, distanceY);
         gStartPos = pos
-        renderCanvas()
+        drawImg();
     }
 }
 
@@ -61,7 +60,6 @@ function renderImgs() {
 }
 
 function onRemoveLine() {
-    console.log('removebtn')
     removeLine();
 }
 function onOpenGalleryMemes() {
@@ -90,7 +88,6 @@ function onFormMeme(ev) {
 function onSaveMeme() {
     drawImg();
     saveMeme();
-    console.log('submittttt')
 }
 function onUpdateTxtLine(val) {
     updateTxtLine(val);
@@ -114,7 +111,6 @@ function onAddLine() {
 }
 
 function onPrevLine() {
-    console.log('prev')
     moveToPrevLine();
     document.querySelector('.input-text').value = getCurrLine().txt;
 }
@@ -129,10 +125,6 @@ function onChangeColor(val) {
 
 
 function renderCanvas(id = 'my-canvas', containerClass = 'canvas-container') {
-    const elImageContainerWidth = document.querySelector('.canvas-container').clientWidth;
-    const elImageContainerHeight = document.querySelector('.canvas-container').clientHeight;
-
-    console.log('canvas rendered')
     var strHtml = `<canvas id="${id}">
     </canvas>`;
     document.querySelector(`.${containerClass}`).innerHTML = strHtml;
@@ -140,11 +132,9 @@ function renderCanvas(id = 'my-canvas', containerClass = 'canvas-container') {
     gCtx = gCanvas.getContext('2d');
     // Can't make the width of the canvas match to his container for now
     resizeCanvas();
-    // drawImg();
-    setImgCanvBgImg();
+    drawImg()
     drawDetails();
     addListeners();
-    console.log(elImageContainerWidth);
 
 
 }
@@ -154,8 +144,6 @@ function resizeCanvas() {
     var elContainer = document.querySelector('.canvas-container');
     // Note: changing the canvas dimension this way clears the canvas
     gCanvas.width = elContainer.offsetWidth
-    console.log( elContainer.offsetWidth)
     gCanvas.height = elContainer.offsetHeight
-    console.log('RESIZE');
     // TODO: redraw..
 }

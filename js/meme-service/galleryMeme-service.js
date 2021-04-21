@@ -7,7 +7,6 @@ function renderImgMemes() {
         return ` <img  src="${src}" > `;
     })
     elMemesContainer.innerHTML = strHtml.join('');
-    console.log(strHtml);
 
 
 }

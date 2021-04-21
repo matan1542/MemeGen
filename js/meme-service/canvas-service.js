@@ -2,6 +2,7 @@
 
 let gCountLines = 0;
 let gYPos = 50;
+let gHeight = 50;
 let gImgMemes = [];
 let KEY = 'memes';
 let gMeme = {
@@ -15,7 +16,7 @@ let gMeme = {
             color: 'red',
             family: 'Impact',
             x: 250,
-            y: 50,
+            y: gHeight,
             isDragging: false
         }
     ]
@@ -30,6 +31,7 @@ function ifSelected() {
 
             line.color = 'red';
 
+
         }
     })
     // clearCanvas();
@@ -38,8 +40,7 @@ function ifSelected() {
 
 function increaseFont() {
     gMeme.lines[gMeme.selectedLineIdx].size += 5;
-    clearCanvas();
-    drawDetails();
+    drawImg();
 }
 function isLineClicked(clickedPos) {
     const pos = {
@@ -48,33 +49,24 @@ function isLineClicked(clickedPos) {
     }
     const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
     // pos.x + gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
-    console.log('distance', distance)
-    return distance <= gMeme.lines[gMeme.selectedLineIdx].size + gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
+    return distance <= gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
 }
 
-function lineSelect(ev) {
-    ev.preventDefault()
-    gMeme.selectedLineIdx = gMeme.lines.findIndex((line) => {
-        return (
-            ev.changedPointers[0].offsetY < line.y &&
-            ev.changedPointers[0].offsetY > line.y - line.size
-        )
-    })
-    renderCanvas()
-}
+
 
 function decreaseFont() {
     if (gMeme.lines[gMeme.selectedLineIdx].size < 12) return
     gMeme.lines[gMeme.selectedLineIdx].size -= 5;
-    clearCanvas();
-    drawDetails();
+    drawImg();
 }
 
 
 function addLine() {
-
-    if (gMeme.lines[gCountLines].y + 160 > gCanvas.height) return;
-    gMeme.lines.push(createLine(x = 250, gMeme.lines[gCountLines++].y + 150))
+    let count = gCountLines;
+    gHeight = gMeme.lines[count].y;
+    if (gHeight + 160 > gCanvas.height) return;
+    gMeme.lines.push(createLine(250, gMeme.lines[gCountLines++].y + 150))
+    gHeight += 150;
     gMeme.selectedLineIdx = gCountLines;
     ifSelected();
 
@@ -85,20 +77,27 @@ function getCurrLine() {
 
 function updateTxtLine(val) {
     gMeme.lines[gMeme.selectedLineIdx].txt = val;
-    clearCanvas();
-    drawDetails();
+    drawImg();
     // drawRect(gMeme.lines[gMeme.selectedLineIdx].x, gMeme.lines[gMeme.selectedLineIdx].y, gMeme.lines[gMeme.selectedLineIdx]);
 
 }
 
 
 function removeLine() {
-    console.log('remove')
-    gMeme.lines.splice(gMeme.selectedLineIdx, 1);
-    gMeme.selectedLineIdx--;
+    let count = gMeme.selectedLineIdx;
+    if (count-- <= 0) {
+        gMeme.selectedLineIdx = 0
+        gCountLines = 0;
+        return;
+    } else {
+        gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+        gMeme.selectedLineIdx--;
+        gCountLines--;
+    }
+
+
     ifSelected()
     renderCanvas();
-    console.dir(gMeme.lines)
 }
 
 
@@ -112,6 +111,8 @@ function moveToNextLine() {
     gMeme.selectedLineIdx = (gMeme.selectedLineIdx === gMeme.lines.length - 1) ? gMeme.selectedLineIdx : gMeme.selectedLineIdx + 1
     ifSelected();
 }
+
+
 function drawText() {
     gMeme.lines.forEach(line => {
         gCtx.fillStyle = (line.pickedColor) ? line.pickedColor : line.color;
@@ -120,7 +121,6 @@ function drawText() {
         gCtx.textAlign = line.align;
         gCtx.fillText(line.txt, line.x, line.y);
         gCtx.strokeText(line.txt, line.x, line.y);
-        drawImg()
 
     })
 }
@@ -181,14 +181,12 @@ function drawDetails() {
 function alignText(val) {
 
     gMeme.lines[gMeme.selectedLineIdx].align = val;
-    clearCanvas();
-    drawDetails();
+    drawImg();
 }
 
 function changeColor(val) {
     gMeme.lines[gMeme.selectedLineIdx].pickedColor = val;
-    clearCanvas();
-    drawDetails();
+    drawImg();
 }
 
 
@@ -222,11 +220,8 @@ function drawImg() {
     elImg.src = `materials/img/${gMeme.selectedImgId}.jpg`;
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gCanvas.width, gCanvas.height);
+        drawDetails();
     }
-    elImg.style.zIndex = '-1';
-
-
-    return elImg;
 }
 
 function getImgs() {
