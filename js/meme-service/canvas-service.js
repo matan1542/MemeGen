@@ -4,6 +4,8 @@ let gCountLines = 0;
 let gYPos = 50;
 let gHeight = 50;
 let gImgMemes = [];
+let gIsTouch = false;
+const gTouchEvs = ['panstart', 'panmove', 'panend'];
 let KEY = 'memes';
 let gMeme = {
     selectedImgId: makeId(),
@@ -23,6 +25,12 @@ let gMeme = {
 }
 let gLastLine;
 
+function getTouchEvs() {
+    return gTouchEvs;
+}
+function isTouched() {
+    return gIsTouch;
+}
 function ifSelected() {
     gMeme.lines.forEach((line, index) => {
         if (gMeme.selectedLineIdx !== index) {
@@ -49,7 +57,7 @@ function isLineClicked(clickedPos) {
     }
     const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
     // pos.x + gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
-    return distance <= gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
+    return distance <= gMeme.lines[gMeme.selectedLineIdx].x + gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
 }
 
 
@@ -97,7 +105,7 @@ function removeLine() {
 
 
     ifSelected()
-    renderCanvas();
+    drawImg();
 }
 
 
@@ -137,30 +145,25 @@ function loadMemesLocalStorage() {
 function saveMeme() {
     loadMemesLocalStorage();
     let img = gCanvas.toDataURL("image/png");
+    // onSuccess(img);
     gImgMemes.push(img);
     saveToStorage(KEY, gImgMemes);
 }
 
-// function drawRect(x, y, line) {
-//     gCtx.beginPath()
-//     gCtx.strokeStyle = 'black'
-//     gCtx.strokeRect(x, y - parseInt(line.size), gCtx.measureText(line.txt).width, 50)
-//     gCtx.closePath()
-// }
 
 function getEvPos(ev) {
     var pos = {
         x: ev.offsetX,
         y: ev.offsetY
     }
-    // if (gTouchEvs.includes(ev.type)) {
-    //     ev.preventDefault()
-    //     ev = ev.changedTouches[0]
-    //     pos = {
-    //         x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-    //         y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
-    //     }
-    // }
+    if (gTouchEvs.includes(ev.type)) {
+        gIsTouch = true;
+        // ev.preventDefault()
+        pos = {
+            x: ev.center.x,
+            y: ev.center.y
+        }
+    }
     return pos
 }
 
@@ -188,7 +191,10 @@ function changeColor(val) {
     gMeme.lines[gMeme.selectedLineIdx].pickedColor = val;
     drawImg();
 }
-
+function downloadImg(elLink) {
+    var imgContent = gCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
 
 
 function moveLine(x, y) {

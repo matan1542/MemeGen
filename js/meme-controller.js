@@ -1,27 +1,28 @@
 let gCanvas
 let gCtx
-
+let isTouch = false;
 function onInit() {
     renderImgs();
 }
 
 function addListeners() {
-    addMouseListeners()
     addTouchListeners()
 }
-function addMouseListeners() {
-    gCanvas.addEventListener('mousemove', onMove)
-    gCanvas.addEventListener('mousedown', onDown)
-    gCanvas.addEventListener('mouseup', onUp)
-}
+
 
 function addTouchListeners() {
-    gCanvas.addEventListener('touchmove', onMove)
-    gCanvas.addEventListener('touchstart', onDown)
-    gCanvas.addEventListener('touchend', onUp)
+    var hammertime = new Hammer(gCanvas);
+    hammertime.on('panmove', onMove)
+
+    hammertime.on('panstart', onDown)
+
+    hammertime.on('panend', onUp)
 }
 
+
+
 function onDown(ev) {
+    ev.preventDefault()
     const line = getCurrLine();
     const pos = getEvPos(ev)
     if (!isLineClicked(pos)) return
@@ -33,7 +34,7 @@ function onDown(ev) {
 
 function onMove(ev) {
     const line = getCurrLine();
-    if (line.isDragging) {
+    if (line.isDragging ) {
         const pos = getEvPos(ev)
         const dx = pos.x - gStartPos.x
         const dy = pos.y - gStartPos.y
@@ -45,10 +46,13 @@ function onMove(ev) {
     }
 }
 
-function onUp() {
+function onUp(ev) {
+    
+
     const line = getCurrLine();
     line.isDragging = false
-    document.body.style.cursor = 'grab'
+    if (isTouch)  isTouch = false;
+    document.body.style.cursor = 'default'
 }
 function renderImgs() {
     const elImageContainer = document.querySelector('.images-wrapper');
@@ -62,6 +66,7 @@ function renderImgs() {
 function onRemoveLine() {
     removeLine();
 }
+
 function onOpenGalleryMemes() {
     renderImgMemes();
     const elMemesContainer = document.querySelector('.memes-container');
@@ -73,7 +78,7 @@ function openMemeEditor(elImg) {
     let elCanvasContainer = document.querySelector('.editor-container');
     elCanvasContainer.hidden = false;
     setNewImg(elImg.dataset.id)
-    renderCanvas(elImg.dataset.id);
+    renderCanvas();
 }
 
 
@@ -92,6 +97,7 @@ function onSaveMeme() {
 function onUpdateTxtLine(val) {
     updateTxtLine(val);
 }
+
 
 function onIncreaseFont() {
     increaseFont();
@@ -130,7 +136,7 @@ function renderCanvas(id = 'my-canvas', containerClass = 'canvas-container') {
     document.querySelector(`.${containerClass}`).innerHTML = strHtml;
     gCanvas = document.getElementById(`${id}`);
     gCtx = gCanvas.getContext('2d');
-    // Can't make the width of the canvas match to his container for now
+    
     resizeCanvas();
     drawImg()
     drawDetails();

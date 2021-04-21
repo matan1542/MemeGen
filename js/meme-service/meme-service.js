@@ -24,12 +24,14 @@ function setNewImg(imgId) {
 
 function _loadImgs() {
     let imgs = [];
-    for (let i = 1; i <= 18; i++) {
+    for (let i = 1; i <= 21; i++) {
         const img = createImg(i);
         imgs.push(img);
     }
     return imgs;
 }
+
+
 
 
 
