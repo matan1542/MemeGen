@@ -140,6 +140,7 @@ function toggleMenu() {
 }
 function handleDropDownMenu() {
     const elDropDown = document.querySelector('.main-menu-wrapper ul');
+    const elDropDownLis = document.querySelectorAll('.main-menu-wrapper ul li a');
     const screenWidth = window.innerWidth;
     if (screenWidth >= 870) {
         gCountFlex = 0;
@@ -150,6 +151,12 @@ function handleDropDownMenu() {
         elDropDown.style.display = 'none';
         gCountFlex++;
     }
+    elDropDownLis.forEach((aHref) => {
+        aHref.addEventListener('click', () => {
+            elDropDown.style.display = 'none';
+
+        })
+    })
 }
 function onOpenMemeEditor(elImg) {
     openMemeEditor(elImg)
