@@ -1,35 +1,37 @@
 .container {
-    width: 980px;
-    margin: 0 auto;
-  }
-  .btn-menu {
-    display: none;
-  }
-  .main-menu-wrapper ul{
-    display: flex;
+  width: 980px;
+  margin: 0 auto;
 }
-.editor-container{
-    margin-top: .2rem;
-  }
+.btn-menu {
+  display: none;
+}
+.main-menu-wrapper ul {
+  display: flex;
+}
+
+
 
 .canvas-container {
-    width: 500px;
-    height: 500px;
-  }
-  #my-canvas{
-    width: 500px;
-    height: 500px;  
-  }
-  .form-container{
-    width: 400px;
-  }
-  .main-wrapper{
-    flex-direction: row;
-    justify-content: center;
-    
-  }
+  width: 500px;
+  height: 500px;
+}
+.canvas-editor {
+  width: 90%;
+  height: 90%;
+}
+.form-container {
+  width: 400px;
+}
 
-.images-wrapper img{
-    width:2rem;
+.main-wrapper {
+  flex-direction: column;
+  justify-content: center;
+}
 
+.editor-wrapper {
+  flex-direction: row;
+}
+
+.images-wrapper img {
+  width: 2rem;
 }

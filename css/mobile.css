@@ -1,40 +1,61 @@
 .container {
-    width: 330px;
-    margin: 0 auto;
-  }
-
-  .btn-menu {
-    display: block;
-  }
-  .main-menu-wrapper ul{
-    display: none;
+  width: 330px;
+  margin: 0 auto;
 }
 
-.images-wrapper, .memes-wrapper{
-    display: none;
+.btn-menu {
+  display: block;
+}
+.main-menu-wrapper ul {
+  display: none;
 }
 
-.editor-container{
-    margin-top: 1rem;
-  }
+.editor-wrapper {
+  flex-direction: column;
+}
+
+.container {
+  width: 400px;
+  margin: 0 auto;
+}
 
 .canvas-container {
-    width: 300px;
-    height: 300px;
-  }
-  #my-canvas{
-    width: 300px;
-    height: 300px;  
-  }
-  .form-container{
-    width: 300px;
-  }
-  .form-container .btn{
-      margin-block: .3rem;
-  }
-  .main-wrapper{
-    flex-direction: column;
-    align-items: center;
-  }
+  width: 300px;
+  height: 300px;
+}
+.canvas-editor {
+  width: 300px;
+  height: 300px;
+}
+.form-container {
+  width: 300px;
+}
+.form-container .btn {
+  margin-block: 0.3rem;
+}
+.main-wrapper {
+  flex-direction: column;
+  align-items: center;
+}
 
 
+.main-menu.menu-open li {
+  background-color: #ff8000;
+  width: 100%;
+  border-top: 1px solid black;
+  border-inline-end: none;
+}
+.main-menu.menu-open li a{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.main-menu.menu-open .link:active {
+  background-color: white;
+ 
+}
+.main-menu.menu-open .link a:active{
+  color: black;
+}

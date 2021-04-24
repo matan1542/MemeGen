@@ -21,14 +21,14 @@
                 MemeGen
             </div>
             <nav id="mainMenu" class="main-menu-wrapper">
-                <ul class="main-menu clean-list flex align-center">
-                    <li>
+                <ul class="main-menu  clean-list flex align-center">
+                    <li class="link">
                         <a href="index.html">Gallery</a>
                     </li>
-                    <li>
+                    <li class="link">
                         <a href="#" onclick="onOpenGalleryMemes()">Memes</a>
                     </li>
-                    <li>
+                    <li class="link">
                         <a href="#">About</a>
                     </li>
                 </ul>
@@ -38,60 +38,72 @@
     </header>
     <main class="main-content">
         <section class=" container main-wrapper flex">
+            <!-- <div class="search-container">
+                <input class="input-text" type="text" placeholder="Search">
+                <div class="keyword-container"></div>
+            </div> -->
             <div class="images-wrapper ">
             </div>
         </section>
 
-        <div hidden class="editor-container">
-            <section class="container main-wrapper flex space-between">
-                <div class="first-panel">
-                    <div class="image-canvas-wrapper">
-                        <div class=" canvas-container">
-                            <!-- Canvas info-->
-                        </div>
+    </main>
+
+    <div hidden class="editor-container">
+        <section class="container editor-wrapper flex space-between">
+            <div class="first-panel">
+                <div class="image-canvas-wrapper">
+                    <div class=" canvas-container">
+                        <!-- Canvas info-->
                     </div>
                 </div>
+            </div>
 
-                <div class="first-panel controller-section">
-                    <form onsubmit="onFormMeme(event)" class="form-container">
-                        <input class="input-text" oninput="onUpdateTxtLine(value)" type="text"
-                            value="Inever eat Falafel">
-
-                        <div class="control-lines">
-                            <div class="control-first-row">
+            <div class="first-panel controller-section">
+                <form onsubmit="onFormMeme(event)" class="form-container">
+                    <div class="control-lines">
+                        <div class="control-first-row">
+                            <input class="input-text" oninput="onUpdateTxtLine(value)" type="text"
+                                value="Inever eat Falafel">
+                            <div class="control-btns-first-row">
                                 <button class="btn btn-next-line" onclick="onPrevLine()"><i
                                         class="fas fa-long-arrow-alt-up"></i></button>
                                 <button class="btn btn-previous-line" onclick="onMoveNextLine() "><i
                                         class="fas fa-long-arrow-alt-down"></i></button>
-                                <button class="btn btn-increase-font" onclick="onIncreaseFont() ">A+</button>
-                                <button class="btn btn-decrease-font" onclick="onDecreaseFont() ">A-</button>
                                 <button onclick="onAddLine()" class="btn btn-add-line">+</button>
                                 <button class="btn btn-remove-line" onclick="onRemoveLine()"><i
                                         class="fas fa-trash-alt"></i></button>
                             </div>
-                            <div class="control-second-row">
-                                <button class="btn btn-align-text" onclick="onAlignText('right')"><i
-                                        class="fas fa-align-left"></i></button>
-                                <button class="btn btn-align-text" onclick="onAlignText('center')"><i
-                                        class="fas fa-align-center"></i></button>
-                                <button class="btn btn-align-text" onclick="onAlignText('left')"><i
-                                        class="fas fa-align-right"></i></button>
-                                <label for="color-text"><i class="fas fa-palette"></i></label>
-                                <input hidden type="color" id="color-text" oninput="onChangeColor(value)">
-                            </div>
                         </div>
-                        <div class="save">
-                            <button onclick="onSaveMeme()" class="btn btn-submit">Save</button>
-                            <a href="#" class="btn btn-download" onclick="downloadImg(this)" download="my-img.jpg">Download</a>
-                            <div class=" share-container"> </div>
+                        <div class="control-second-row">
+                            <button class="btn btn-increase-font" onclick="onIncreaseFont() ">A+</button>
+                            <button class="btn btn-decrease-font" onclick="onDecreaseFont() ">A-</button>
+                            <button class="btn btn-align-text" onclick="onAlignText('right')"><i
+                                    class="fas fa-align-left"></i></button>
+                            <button class="btn btn-align-text" onclick="onAlignText('center')"><i
+                                    class="fas fa-align-center"></i></button>
+                            <button class="btn btn-align-text" onclick="onAlignText('left')"><i
+                                    class="fas fa-align-right"></i></button>
                         </div>
 
-                    </form>
+                        <div class="control-third-row">
 
-                </div>
-               
-        </div>
-    </main>
+                            <label for="color-text"><i class="fas fa-palette"></i></label>
+                            <input hidden type="color" id="color-text" oninput="onChangeColor(value)">
+                        </div>
+                    </div>
+
+                    <div class="save">
+                        <button onclick="onSaveMeme()" class="btn btn-submit">Save</button>
+                        <a href="#" class="btn btn-download" onclick="downloadImg(this)"
+                            download="my-img.jpg">Download</a>
+                        <div class=" share-container"> </div>
+                    </div>
+            </div>
+            </form>
+
+    </div>
+    </section>
+    </div>
     <div hidden class="memes-container">
         <div class="memes-wrapper container">
         </div>
@@ -99,11 +111,10 @@
     <footer>
         <div class="content-container">
             <h3>memegen</h3>
-            <h2>all rights reserved 2021</h2>
+            <h2>All rights reserved 2021</h2>
         </div>
     </footer>
 
-    <script src="js/lib/hammer.min.js"></script>
     <script src="js/util/util-service.js"></script>
     <script src="js/storage-service/storage-service.js"></script>
     <script src="js/meme-service/meme-service.js"></script>

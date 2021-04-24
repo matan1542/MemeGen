@@ -1,28 +1,25 @@
-.container {
-    width: 600px;
-    margin: 0 auto;
-  }
-  .btn-menu {
-    display: none;
-  }
-  .editor-container{
-    margin-top: .2rem;
-  }
-  .main-menu-wrapper ul{
-    display: flex;
+.editor-container,
+.memes-container {
+  height: 80vh;
 }
-.canvas-container {
-    width: 500px;
-    height: 500px;
-  }
-  #my-canvas{
-    width: 500px;
-    height: 500px;  
-  }
-  .form-container{
-    width: 500px;
-  }
-  .main-wrapper{
-    flex-direction: column;
-    align-items: center;
-  }
+.btn-menu {
+  display: none;
+}
+
+.main-menu-wrapper ul {
+  display: flex;
+}
+
+
+.container {
+  width: 660px;
+  margin: 0 auto;
+}
+.main-wrapper {
+  flex-direction: column;
+  align-items: center;
+}
+
+.editor-wrapper {
+  flex-direction: row;
+}

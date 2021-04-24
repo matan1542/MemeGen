@@ -1,6 +1,7 @@
+@import "component.css";
 @import "mobile.css";
-@import "tablet.css"  screen and (min-width:600px);
-@import "desktop.css" screen and (min-width:1000px);
+@import "tablet.css" screen and (min-width: 870px);
+@import "desktop.css" screen and (min-width: 1000px);
 
 * {
   box-sizing: border-box;
@@ -33,6 +34,7 @@ body {
   position: relative;
   font-size: 1rem;
   margin: 0;
+  height: 100vh;
 }
 main {
   display: flex;
@@ -72,12 +74,30 @@ main {
   margin-inline-end: 1rem;
 }
 
-/* LAYOUT */
+.menu-open {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 2.2rem;
+  flex-direction: column;
+}
+.main-screen{
+  background-color: #fff;
+}
+/* 3 */
 /* .container {
   max-width: 980px;
   margin: 0 auto;
 } */
 /* GRID LAYOUT */
+.canvas-container {
+  margin: 1rem;
+}
+.editor-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .main-wrapper {
   margin-top: 1rem;
@@ -93,37 +113,41 @@ main {
   /* gap: 10px; */
 }
 
-.images-wrapper img  ,.memes-wrapper img{
+.images-wrapper img,
+.memes-wrapper img {
   padding: 0.3rem;
   width: 11rem;
-  border-radius:2rem;
-  margin-top: .3rem;
-  box-shadow: 9px 7px 13px -4px rgba(0,0,0,0.78); 
+  border-radius: 2rem;
+  margin-top: 0.3rem;
+  box-shadow: 9px 7px 13px -4px rgba(0, 0, 0, 0.78);
 }
-.images-wrapper img:hover {
+.images-wrapper img:hover ,.memes-wrapper img:hover {
   opacity: 0.9;
   cursor: pointer;
 }
 
+.control-btns-first-row {
+  display: flex;
+  justify-content: center;
+}
 /* CANVAS */
 .editor-container,
 .memes-container {
+  margin-top: 1rem;
   top: 2.6rem;
-  position: absolute;
-  height: 100%;
   width: 100%;
   background-color: #e3e3e3;
 }
-#my-canvas{
-  border-radius: .6rem;
+.canvas-editor {
+  border-radius: 0.6rem;
   box-shadow: 0px -1px 6px rgba(66, 66, 66, 0.54);
 }
 
 .controller-section {
   display: flex;
+  align-items: center;
   flex-direction: column;
   margin-inline-start: 2rem;
-  width: 100%;
 }
 .controller-section input {
   margin: 1rem;
@@ -151,16 +175,9 @@ main {
   padding-block-end: 2rem;
 }
 
-
-.btn-previous-line,
-.btn-next-line {
-  /* padding: 1rem; */
-  border-radius: 0.5rem;
-  font-size: 2rem;
-}
-
 .control-second-row {
   margin-block-start: 0.5rem;
+  margin-inline-start: 0.6rem;
 }
 
 /* .btn-remove-line{
@@ -174,96 +191,20 @@ main {
 }
 
 /* COMPONENTS */
-.btn-menu {
-  background-color: #ff8000;
-  padding: .4rem;
-  border: none;
-  font-size: 2rem;
-  color: white;
-}
-.btn {
-  margin-inline-end: 1rem;
-  background-color: #fff;
-  cursor: pointer;
-  box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
-  background-color: #f9f9f9;
-  border-radius: 6px;
-  border: 1px solid #dcdcdc;
-  display: inline-block;
-  cursor: pointer;
-  color: #666666;
-  font-family: Arial;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 1.2rem;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #ffffff;
-  border-radius: .6rem;
-  box-shadow: 0px -1px 6px rgba(66, 66, 66, 0.54);
-}
-.btn:hover {
- 
-  background: linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-  background-color: #e9e9e9;
-}
-.btn:active {
-  
-  position: relative;
-  top: 1px;
-}
-
-.btn:hover {
-  background-color: rgb(196, 181, 181);
-}
-.btn-submit {
-  /* padding: 0.3rem;
-  padding-block: 1rem; */
-  background-color: #1dd1a1;
-  /* border-radius: 0.2rem; */
-  margin-inline-start: 3rem;
-  margin-block-start: 1.2rem;
-  font-size: 1.4rem;
-  flex-basis: 50%;
-}
-.save{
-  display: flex;
-}
-.btn-download{
-  text-align: center;
-  flex-basis: 50%;
-  font-size: 1.4rem;
-
-}
-.btn-add-line {
-  align-self: flex-start;
-  /* padding-inline: 1rem;
-  padding: 1rem; */
-  border-radius: 0.4rem;
-  font-size: 2rem;
-}
-
-.btn-increase-font,
-.btn-decrease-font {
-  /* height: 5rem; */
-  font-size: 1.5rem;
-}
-
 .control-lines {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-inline-start: 3rem;
 }
-/* .btn-align-text{
-    padding:1rem;
-} */
-/* list helpers */
 
 .clean-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+.btn-menu {
+  font-size: 1.3rem;
+  padding-block: 0.3rem;
 }
 
 .fas.fa-palette {
