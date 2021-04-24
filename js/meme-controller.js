@@ -154,6 +154,8 @@ function handleDropDownMenu() {
     elDropDownLis.forEach((aHref) => {
         aHref.addEventListener('click', () => {
             elDropDown.style.display = 'none';
+            gIsMenuOpen = false;
+
 
         })
     })
