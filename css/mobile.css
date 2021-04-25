@@ -37,7 +37,9 @@
   flex-direction: column;
   align-items: center;
 }
-
+.editor-container, .memes-container {
+  height: 80vh;
+}
 
 .main-menu.menu-open li {
   background-color: #ff8000;
